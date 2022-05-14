@@ -31,16 +31,35 @@
 .controller {
   position: fixed;
   bottom: 1rem;
-  left: 45%;
+  left: 42%;
+  display: flex;
+  align-items: center;
 }
 
-.end-call {
-  /* margin: 0; */
+.controller_option {
   padding: 10px;
   border-radius: 50%;
-  width: 50px;
+  height: 40px;
+  width: 40px;
+  margin: 0 8px;
   border: 0.1px solid rgba(255, 255, 255, 0.486);
   cursor: pointer;
+  background-color: white;
+  color: black;
+}
+.controller_option_off {
+  padding: 10px;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin: 0 8px;
+  border: 0.1px solid rgba(255, 255, 255, 0.486);
+  cursor: pointer;
+  background-color: rgb(228, 40, 40);
+  color: rgb(255, 255, 255);
+}
+
+.end_call {
   background-color: rgb(231, 45, 45);
   color: white;
 }

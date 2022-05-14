@@ -14,6 +14,9 @@ const Room = () => {
   const navigate = useNavigate();
 
   const [peers, setPeers] = useState([]);
+  const [handleCamere, setHandleCamere] = useState(false);
+  const [handleMic, setHandleMic] = useState(false);
+  const [handleShare, setHandleShare] = useState(false);
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
@@ -105,6 +108,7 @@ const Room = () => {
     } else {
       videoTrack.enabled = true;
     }
+    setHandleCamere(!handleCamere);
   }
 
   function toggleAudio() {
@@ -116,6 +120,7 @@ const Room = () => {
     } else {
       audioTrack.enabled = true;
     }
+    setHandleMic(!handleMic);
   }
 
   function shareScreen() {
@@ -140,19 +145,58 @@ const Room = () => {
       {peers.map((peer, index) => {
         return <Video key={index} peer={peer} />;
       })}
-      {/* </div> */}
 
       <div className='controller'>
-        <button onClick={toggleVideo}>Cam Off</button>
-        <button onClick={toggleAudio}>Mute</button>
+        {handleCamere ? (
+          <button
+            title='Camera On'
+            className='controller_option_off'
+            onClick={toggleVideo}
+          >
+            <Icons.CameraOff />
+          </button>
+        ) : (
+          <button
+            title='Camera Off'
+            className='controller_option'
+            onClick={toggleVideo}
+          >
+            <Icons.Camera />
+          </button>
+        )}
+        {handleMic ? (
+          <button
+            title='Mic On'
+            className='controller_option_off'
+            onClick={toggleAudio}
+          >
+            <Icons.Mute />
+          </button>
+        ) : (
+          <button
+            title='Mute Mic'
+            className='controller_option'
+            onClick={toggleAudio}
+          >
+            {" "}
+            <Icons.MicOn />
+          </button>
+        )}
 
-        <button onClick={shareScreen}>Scr Share</button>
+        <button
+          title='Share Screen'
+          className='controller_option'
+          onClick={shareScreen}
+        >
+          <Icons.Share />
+        </button>
 
         <button
           onClick={() => {
             navigate("/");
           }}
-          className='end-call'
+          title='Close'
+          className='controller_option end_call'
         >
           <Icons.phoneSlash />
         </button>
