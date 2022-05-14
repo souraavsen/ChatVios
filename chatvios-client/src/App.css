@@ -152,3 +152,48 @@ input:focus {
   font-weight: 400;
   color: white;
 }
+
+.user_video {
+  height: 20%;
+  width: 20%;
+  position: fixed;
+  bottom: 6%;
+  right: 2%;
+  border-radius: 5px;
+  border: 1px solid rgba(220, 220, 220, 0.5);
+}
+
+.user > p {
+  color: white;
+  position: fixed;
+  bottom: 6%;
+  right: 3%;
+}
+
+.disable_video {
+  display: none;
+}
+
+.minimize_user_video {
+  position: fixed;
+  bottom: 6%;
+  right: 3%;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(220, 220, 220, 0.5);
+  background: #555;
+  box-shadow: rgba(255, 255, 255, 0.137) px 7px 29px 0px;
+}
+
+.minimize {
+  width: 20px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.39);
+  position: fixed;
+  top: 73%;
+  right: 8%;
+}
+
+.hide_minimize{
+  display: none;
+}

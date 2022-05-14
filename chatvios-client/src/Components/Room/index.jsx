@@ -17,6 +17,7 @@ const Room = () => {
   const [handleCamere, setHandleCamere] = useState(false);
   const [handleMic, setHandleMic] = useState(false);
   const [handleShare, setHandleShare] = useState(false);
+  const [toggleMin, setToggleMin] = useState(false);
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
@@ -139,9 +140,33 @@ const Room = () => {
 
   return (
     <div className='main_video_container'>
-      <h4 className="room_title">{JSON.parse(localStorage.getItem("room_title"))}</h4>
-      <video className='video' ref={userVideo} autoPlay playsInline />
-      {/* <p>You</p> */}
+      <h4 className='room_title'>
+        {JSON.parse(localStorage.getItem("room_title"))}
+      </h4>
+      <div className='user'>
+        <video
+          // disable_video
+          className={toggleMin ? "disable_video" : "user_video"}
+          ref={userVideo}
+          autoPlay
+          playsInline
+        />
+        {/* minimize_user_video */}
+        <p
+          className={toggleMin && "minimize_user_video"}
+          onClick={() => {
+            toggleMin && setToggleMin(!toggleMin);
+          }}
+        >
+          You
+        </p>
+        <p
+          className={toggleMin ? "hide_minimize" : "minimize"}
+          onClick={() => setToggleMin(!toggleMin)}
+        >
+          <Icons.Minimize />
+        </p>
+      </div>
       {/* <div className='video_container'> */}
       {peers.map((peer, index) => {
         return <Video key={index} peer={peer} />;
