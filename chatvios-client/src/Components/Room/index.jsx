@@ -139,6 +139,7 @@ const Room = () => {
 
   return (
     <div className='main_video_container'>
+      <h4 className="room_title">{JSON.parse(localStorage.getItem("room_title"))}</h4>
       <video className='video' ref={userVideo} autoPlay playsInline />
       {/* <p>You</p> */}
       {/* <div className='video_container'> */}
