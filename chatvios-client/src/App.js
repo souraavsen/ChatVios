@@ -5,8 +5,11 @@ import Room from "./Components/Room";
 
 function App() {
   return (
-    <div>
-     ChatVios
+    <div className="container">
+      <Routes>
+        <Route path='/' element={<GenerateRoom />} />
+        <Route path='/room/:roomID' element={<Room/>} />
+      </Routes>
     </div>
   );
 }
