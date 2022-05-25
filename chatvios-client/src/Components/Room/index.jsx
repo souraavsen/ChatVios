@@ -18,7 +18,6 @@ const Room = () => {
   const [peers, setPeers] = useState([]);
   const [handleCamere, setHandleCamere] = useState(false);
   const [handleMic, setHandleMic] = useState(false);
-  const [handleShare, setHandleShare] = useState(false);
   const [toggleMin, setToggleMin] = useState(false);
   const socketRef = useRef();
   const userVideo = useRef();
@@ -26,7 +25,6 @@ const Room = () => {
   const senders = useRef([]);
   const userStream = useRef();
   const paramID = useParams();
-  console.log("Use Navigate------------", paramID?.roomID?.split("."));
 
   useEffect(() => {
     const roomID = paramID?.roomID?.split(".")?.[0];
