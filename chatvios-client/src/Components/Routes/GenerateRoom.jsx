@@ -11,7 +11,7 @@ const GenerateRoom = () => {
   function create() {
     const id = uuid();
     localStorage.setItem("room_title", JSON.stringify(roomTitle));
-    navigate(`/room/${id}`);
+    navigate(`/room/${id}.${roomTitle}`);
   }
 
   return (
@@ -36,7 +36,7 @@ const GenerateRoom = () => {
         />
       </div>
       <div className='room_details'>
-        <label for='rname'>Room Name</label>
+        <label htmlFor='rname'>Room Name</label>
         <input
           type='text'
           placeholder='Enter Room Name'

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Video from "./Video";
 import Icons from "../Icons";
 
@@ -12,6 +12,8 @@ const videoHandeler = {
 
 const Room = () => {
   const navigate = useNavigate();
+
+  // const { state } = useLocation();
 
   const [peers, setPeers] = useState([]);
   const [handleCamere, setHandleCamere] = useState(false);
@@ -24,8 +26,10 @@ const Room = () => {
   const senders = useRef([]);
   const userStream = useRef();
   const paramID = useParams();
+  console.log("Use Navigate------------", paramID?.roomID?.split("."));
 
   useEffect(() => {
+    const roomID = paramID?.roomID?.split(".")?.[0];
     socketRef.current = io.connect("/");
     navigator.mediaDevices
       .getUserMedia({
@@ -35,7 +39,7 @@ const Room = () => {
       .then((stream) => {
         userStream.current = stream;
         userVideo.current.srcObject = stream;
-        socketRef.current.emit("join room", paramID.roomID);
+        socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", (users) => {
           const peers = [];
           users.forEach((userID) => {
@@ -140,18 +144,14 @@ const Room = () => {
 
   return (
     <div className='main_video_container'>
-      <h4 className='room_title'>
-        {JSON.parse(localStorage.getItem("room_title"))}
-      </h4>
+      <h4 className='room_title'>{paramID?.roomID?.split(".")?.[1]}</h4>
       <div className='user'>
         <video
-          // disable_video
           className={toggleMin ? "disable_video" : "user_video"}
           ref={userVideo}
           autoPlay
           playsInline
         />
-        {/* minimize_user_video */}
         <p
           className={toggleMin && "minimize_user_video"}
           onClick={() => {

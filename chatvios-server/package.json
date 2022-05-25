@@ -4,7 +4,7 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "start": "PROD=true node server.js",
+    "start": "node server.js",
     "start-dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

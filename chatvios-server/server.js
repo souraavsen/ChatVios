@@ -1,6 +1,5 @@
 const express = require("express");
 const http = require("http");
-const path = require("path");
 const app = express();
 const server = http.createServer(app);
 const socket = require("socket.io");
@@ -11,11 +10,15 @@ const users = {};
 
 const socketToRoom = {};
 
+app.get("/", (req, res) => {
+  res.send("Running");
+});
+
 io.on("connection", (socket) => {
   socket.on("join room", (roomID) => {
     if (users[roomID]) {
       const length = users[roomID].length;
-      if (length === 4) {
+      if (length === 50) {
         socket.emit("room full");
         return;
       }
@@ -52,13 +55,6 @@ io.on("connection", (socket) => {
     }
   });
 });
-
-if (process.env.PROD) {
-  app.use(express.static(path.join(__dirname, "./chatvios-client")));
-  app.length('*', (req, res) => {
-    res.sendFile(path.join(__dirname, "./chatvios-client/build/index.html"));
-  })
-}
 
 const port = process.env.PORT || 8000;
 server.listen(port, () => console.log(`server is running on port ${port}`));
